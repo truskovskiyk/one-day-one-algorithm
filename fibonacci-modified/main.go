@@ -6,7 +6,6 @@ import (
 	"bufio"
 	"os"
 	"math/big"
-	"strconv"
 )
 
 
@@ -32,7 +31,7 @@ func readTask(ioReader io.Reader) (int64, int64, int64) {
 }
 
 
-func fibonacciModified(n int64, t1 int64, t2 int64) string {
+func FibonacciModified(n int64, t1 int64, t2 int64) string {
 	t11 := big.NewInt(t1)
 	t22 := big.NewInt(t2)
 	result := big.NewInt(t2)
@@ -51,6 +50,6 @@ func main() {
 
 	//filePath := "./input.txt"
 	//n, t1, t2 := readFromFile(filePath)
-	result := fibonacciModified(n, t1, t2)
+	result := FibonacciModified(n, t1, t2)
 	fmt.Println(result)
 }
