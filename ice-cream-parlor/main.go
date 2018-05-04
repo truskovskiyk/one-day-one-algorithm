@@ -25,31 +25,22 @@ func BinarySearch(key int, arrayOfElements []int) int {
 	return -1
 }
 
-func findIndex(el int, c []int) int {
-	for idx, element := range c {
-		if element == el {
-			return idx
-		}
-	}
-	panic("can't find index")
-}
-
-func findIndex2(el int, idxOrigin int, c []int) int {
-	for idx, element := range c {
-		if element == el && idx != idxOrigin {
-			return idx
-		}
-	}
-	panic("can't find index")
-}
-
 func formatSolution(firstElement int, secondElement int, originArray []int) (int, int) {
-	idxOrigin := findIndex(firstElement, originArray)
-	kIdxOrigin := findIndex2(secondElement, idxOrigin, originArray)
-	if idxOrigin < kIdxOrigin {
-		return idxOrigin, kIdxOrigin
+	firstElementIndex := 0
+	secondElementIndex := 0
+	for idx, element := range originArray {
+		if element == firstElement {
+			firstElementIndex = idx
+		}
+		if element == secondElement && firstElementIndex != idx {
+			secondElementIndex = idx
+		}
+	}
+
+	if firstElementIndex < secondElementIndex {
+		return firstElementIndex, secondElementIndex
 	} else {
-		return kIdxOrigin, idxOrigin
+		return secondElementIndex, firstElementIndex
 	}
 
 }
