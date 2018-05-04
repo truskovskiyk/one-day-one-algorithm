@@ -43,22 +43,26 @@ func findIndex2(el int, idxOrigin int, c []int) int {
 	panic("can't find index")
 }
 
+func formatSolution(firstElement int, secondElement int, originArray []int) (int, int) {
+	idxOrigin := findIndex(firstElement, originArray)
+	kIdxOrigin := findIndex2(secondElement, idxOrigin, originArray)
+	if idxOrigin < kIdxOrigin {
+		return idxOrigin, kIdxOrigin
+	} else {
+		return kIdxOrigin, idxOrigin
+	}
+
+}
 func IcecreamParlor(m int, c []int) (int, int) {
-	tmp := make([]int, len(c))
-	copy(tmp, c)
+	originArray := make([]int, len(c))
+	copy(originArray, c)
 	sort.Ints(c)
 
 	for idx, element := range c {
 		k := m - element
 		kIdx := BinarySearch(k, c)
 		if kIdx != -1 && kIdx != idx {
-			idxOrigin := findIndex(element, tmp)
-			kIdxOrigin := findIndex2(k, idxOrigin, tmp)
-			if idxOrigin < kIdxOrigin {
-				return idxOrigin, kIdxOrigin
-			} else {
-				return kIdxOrigin, idxOrigin
-			}
+			return formatSolution(element, k, originArray)
 		}
 	}
 	panic("there is not solution")
@@ -66,12 +70,6 @@ func IcecreamParlor(m int, c []int) (int, int) {
 
 func readFromStdIn() {
 	readTask(bufio.NewReader(os.Stdin))
-}
-
-func readFromFile(filePath string) {
-	f, _ := os.Open(filePath)
-	defer f.Close()
-	readTask(bufio.NewReader(f))
 }
 
 func readTask(ioReader io.Reader) {
@@ -96,16 +94,5 @@ func readTask(ioReader io.Reader) {
 }
 
 func main() {
-	//m := 4
-	//c := []int{1, 4, 5, 3, 2}
-	//i1, i2 := IcecreamParlor(m, c)
-	//fmt.Println(i1 + 1, i2 + 1)
-
-	//m := 4
-	//c := []int{2, 2, 4, 3}
-	//i1, i2 := IcecreamParlor(m, c)
-	//fmt.Println(i1+1, i2+1)
-	//filePath := "test.txt"
-	//readFromFile(filePath)
 	readFromStdIn()
 }
