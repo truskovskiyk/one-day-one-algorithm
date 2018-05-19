@@ -103,11 +103,7 @@ func bfs(n int32, m int32, edges [][]int32, s int32) []int32 {
 }
 
 func main() {
-	//reader := bufio.NewReaderSize(os.Stdin, 1024 * 1024)
-	filePath := "bfs_input.txt"
-	f, _ := os.Open(filePath)
-	defer f.Close()
-	reader := bufio.NewReader(f)
+	reader := bufio.NewReaderSize(os.Stdin, 1024 * 1024)
 
 	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
 	checkError(err)
