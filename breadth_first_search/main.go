@@ -73,6 +73,20 @@ func NewGraph(n int32, m int32, edges [][]int32) Graph {
 	return *graph
 }
 
+func formatResult(numVertex int32, shortedPath [][]int32, source int32) []int32 {
+	results := make([]int32, 0)
+	for i := int32(0); i < numVertex; i += 1 {
+		if i ==  source  {
+			continue
+		}
+		dist := int32(len(shortedPath[i]) * 6)
+		if dist == 0 {
+			dist = -1
+		}
+		results = append(results, dist)
+	}
+	return results
+}
 
 // Complete the bfs function below.
 func bfs(n int32, m int32, edges [][]int32, s int32) []int32 {
@@ -81,27 +95,10 @@ func bfs(n int32, m int32, edges [][]int32, s int32) []int32 {
 		e[0] = e[0] - 1
 		e[1] = e[1] - 1
 	}
-	s = s - 1
-
-
+	source := s - 1
 	graph := NewGraph(n,m,edges)
-	shortedPath := graph.BFS(s)
-
-	results := make([]int32, 0)
-
-	for i := int32(0); i < graph.numVertex; i += 1 {
-		if i ==  s  {
-			continue
-		}
-		dist := int32(len(shortedPath[i]) * 6)
-		if dist == 0 {
-			dist = -1
-		}
-		results = append(results, dist)
-
-	}
-	fmt.Println(results)
-	return results
+	shortedPath := graph.BFS(source)
+	return formatResult(graph.numVertex, shortedPath, source)
 
 }
 
