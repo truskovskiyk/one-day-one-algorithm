@@ -21,12 +21,20 @@ func (g Graph) addEdge(v int32, w int32) {
 	g.adj[w] = append(g.adj[w], v)
 }
 
-func (g Graph) BFS (s int32) [][]int32 {
+
+func shortedPathFromedgeTo(edgeTo []int32, target int32, source int32) []int32 {
+	path := make([]int32, 0)
+	for x := target; x != source; x = edgeTo[x] {
+		path = append(path, x)
+	}
+	return path
+}
+func (g Graph) BFS (source int32) [][]int32 {
 	marked := make([]bool, g.numVertex)
 	queue := make([]int32, 0)
 	edgeTo := make([]int32, g.numVertex)
-	marked[s] = true
-	queue = append(queue, s)
+	marked[source] = true
+	queue = append(queue, source)
 	for ; len(queue) > 0; {
 		v := queue[0]
 		queue = queue[1:]
@@ -41,17 +49,13 @@ func (g Graph) BFS (s int32) [][]int32 {
 	}
 	// find shorted path
 	shortedPath := make([][]int32, g.numVertex)
-	for i := int32(0); i < g.numVertex; i += 1 {
-		shortedPath[i] = make([]int32, 0)
-	}
-
-	for i := int32(0); i < g.numVertex; i += 1 {
-		if marked[i] {
-			for x := i; x != s; x = edgeTo[x] {
-				shortedPath[i] = append(shortedPath[i], x)
-			}
+	for targer := int32(0); targer < g.numVertex; targer += 1 {
+		shortedPath[targer] = make([]int32, 0)
+		if marked[targer] {
+			shortedPath[targer] = shortedPathFromedgeTo(edgeTo, targer, source)
 		}
 	}
+
 	return shortedPath
 }
 
@@ -64,22 +68,29 @@ func NewGraph(n int32, m int32, edges [][]int32) Graph {
 		graph.adj[i] = make([]int32, 0)
 	}
 	for _, e := range edges {
-		v := e[0] - 1
-		w := e[1] - 1
-		graph.addEdge(v, w)
+		graph.addEdge(e[0], e[1])
 	}
-
 	return *graph
 }
 
 
 // Complete the bfs function below.
 func bfs(n int32, m int32, edges [][]int32, s int32) []int32 {
-	results := make([]int32, 0)
+	// start index from 0
+	for _, e := range edges {
+		e[0] = e[0] - 1
+		e[1] = e[1] - 1
+	}
+	s = s - 1
+
+
 	graph := NewGraph(n,m,edges)
-	shortedPath := graph.BFS(s - 1)
+	shortedPath := graph.BFS(s)
+
+	results := make([]int32, 0)
+
 	for i := int32(0); i < graph.numVertex; i += 1 {
-		if i ==  s - 1 {
+		if i ==  s  {
 			continue
 		}
 		dist := int32(len(shortedPath[i]) * 6)
@@ -89,16 +100,17 @@ func bfs(n int32, m int32, edges [][]int32, s int32) []int32 {
 		results = append(results, dist)
 
 	}
+	fmt.Println(results)
 	return results
 
 }
 
 func main() {
-	reader := bufio.NewReaderSize(os.Stdin, 1024 * 1024)
-	//filePath := "bfs_input.txt"
-	//f, _ := os.Open(filePath)
-	//defer f.Close()
-	//reader := bufio.NewReader(f)
+	//reader := bufio.NewReaderSize(os.Stdin, 1024 * 1024)
+	filePath := "bfs_input.txt"
+	f, _ := os.Open(filePath)
+	defer f.Close()
+	reader := bufio.NewReader(f)
 
 	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
 	checkError(err)
