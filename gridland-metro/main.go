@@ -7,10 +7,26 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"sort"
 )
 
+
 // Complete the gridlandMetro function below.
-func GridlandMetro(n int32, m int32, k int32, track [][]int32) int32 {
+func GridlandMetro(n int32, m int32, k int32, tracks [][]int32) int32 {
+
+	sort.Slice(tracks, func(i, j int) bool { return tracks[i][0] < tracks[j][0] })
+
+	counter := make(map[int32][][]int32)
+	for i := 0; i < len(tracks); i++ {
+
+		track := tracks[i]
+		fmt.Println(track)
+		r := track[0]
+		c1 := track[1]
+		c2 := track[2]
+		counter[r] = append(counter[r], []int32{c1, c2})
+	}
+	fmt.Println(counter)
 	return int32(1)
 
 }
