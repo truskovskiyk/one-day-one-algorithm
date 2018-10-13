@@ -9,21 +9,53 @@ import (
 	"strings"
 )
 
+func min(arr []int32) int32 {
+	minElement := arr[0]
+	for i := 0; i < len(arr); i ++ {
+		if arr[i] < minElement {
+			minElement = arr[i]
+		}
+	}
+	return minElement
+}
+
+func insertIntoStart(arr []int32, element int32) []int32 {
+	arr = append(arr, 0)
+	copy(arr[0+1:], arr[0:])
+	arr[0] = element
+	return arr
+}
+
 // Complete the cutTheSticks function below.
-func cutTheSticks(arr []int32) []int32 {
+func CutTheSticks(arr []int32) []int32 {
+	if len(arr) == 0 {
+		return make([]int32, 0)
+	}
 
+	minElement := min(arr)
+	newArray := make([]int32, 0)
+	for i := 0; i < len(arr); i ++ {
+		el := arr[i] - minElement
 
+		if el > 0 {
+			newArray = append(newArray, el)
+
+		}
+	}
+	res := CutTheSticks(newArray)
+	res = insertIntoStart(res, int32(len(arr)))
+	return res
 }
 
 func main() {
-	reader := bufio.NewReaderSize(os.Stdin, 1024 * 1024)
+	reader := bufio.NewReaderSize(os.Stdin, 1024*1024)
 
 	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
 	checkError(err)
 
 	defer stdout.Close()
 
-	writer := bufio.NewWriterSize(stdout, 1024 * 1024)
+	writer := bufio.NewWriterSize(stdout, 1024*1024)
 
 	nTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
 	checkError(err)
@@ -40,12 +72,12 @@ func main() {
 		arr = append(arr, arrItem)
 	}
 
-	result := cutTheSticks(arr)
+	result := CutTheSticks(arr)
 
 	for i, resultItem := range result {
 		fmt.Fprintf(writer, "%d", resultItem)
 
-		if i != len(result) - 1 {
+		if i != len(result)-1 {
 			fmt.Fprintf(writer, "\n")
 		}
 	}
