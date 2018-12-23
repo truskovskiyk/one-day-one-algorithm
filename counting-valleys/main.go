@@ -11,29 +11,26 @@ import (
 
 // Complete the countingValleys function below.
 func countingValleys(n int, s string) int {
-	numValleys := 0
-
-	prev := string("U")
 	up := string("U")
-	down := string("D")
+	numValleys := 0
 	seaLevel := 0
+	prevSeaLevel := 0
+
 	for i := 0; i < n; i++ {
 		current := string(s[i])
-		fmt.Println("current ", current)
 
-		if current == down {
-			seaLevel -= 1
-		} else {
+		prevSeaLevel = seaLevel
+		if current == up {
 			seaLevel += 1
+		} else {
+			seaLevel -= 1
 		}
-		if current == down && prev == up {
+		if prevSeaLevel < 0 && seaLevel >= 0 {
 			numValleys += 1
-			fmt.Println("new valley ", seaLevel)
-
 		}
-		prev = current
 	}
 	return numValleys
+
 
 }
 
