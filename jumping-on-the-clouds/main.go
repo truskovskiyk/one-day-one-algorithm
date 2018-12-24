@@ -10,9 +10,23 @@ import (
 )
 
 // Complete the jumpingOnClouds function below.
-func jumpingOnClouds(c []int32) int32 {
-
-
+func jumpingOnClouds(c []int) int {
+	if len(c) == 1 {
+		return 0
+	}
+	if len(c) == 2 {
+		return 1
+	}
+	numJumps:= 0
+	for i := 0; i < len(c) - 1;  {
+		if (i + 2) < len(c) && c[i + 2] == 0 {
+			i += 2
+		} else {
+			i += 1
+		}
+		numJumps += 1
+	}
+	return numJumps
 }
 
 func main() {
@@ -27,16 +41,16 @@ func main() {
 
 	nTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
 	checkError(err)
-	n := int32(nTemp)
+	n := int(nTemp)
 
 	cTemp := strings.Split(readLine(reader), " ")
 
-	var c []int32
+	var c []int
 
 	for i := 0; i < int(n); i++ {
 		cItemTemp, err := strconv.ParseInt(cTemp[i], 10, 64)
 		checkError(err)
-		cItem := int32(cItemTemp)
+		cItem := int(cItemTemp)
 		c = append(c, cItem)
 	}
 
