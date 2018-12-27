@@ -9,21 +9,49 @@ import (
 	"strings"
 )
 
+const MaxUint = ^uint(0)
+const MaxInt = int(MaxUint >> 1)
+const MinInt = -MaxInt - 1
+
+
+func getHourglass(arr [][]int, i int, j int) int {
+	a := arr[i][j]
+	b := arr[i][j + 1]
+	c := arr[i][j + 2]
+
+	d := arr[i + 1][j + 1]
+
+	e := arr[i + 2][j]
+	f := arr[i + 2][j + 1]
+	g := arr[i + 2][j + 2]
+
+	return a + b + c + d + e + f + g
+}
+
 // Complete the hourglassSum function below.
 func hourglassSum(arr [][]int) int {
+	maxHourglassSum := MinInt
+	for i := 0; i < len(arr) - 2; i += 1 {
+		for j := 0; j < len(arr) - 2; j += 1 {
+			currentHourglassSum := getHourglass(arr, i, j)
+			if currentHourglassSum > maxHourglassSum {
+				maxHourglassSum = currentHourglassSum
+			}
+		}
+	}
 
-
+	return maxHourglassSum
 }
 
 func main() {
-	reader := bufio.NewReaderSize(os.Stdin, 1024 * 1024)
+	reader := bufio.NewReaderSize(os.Stdin, 1024*1024)
 
 	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
 	checkError(err)
 
 	defer stdout.Close()
 
-	writer := bufio.NewWriterSize(stdout, 1024 * 1024)
+	writer := bufio.NewWriterSize(stdout, 1024*1024)
 
 	var arr [][]int
 	for i := 0; i < 6; i++ {
