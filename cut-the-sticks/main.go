@@ -11,7 +11,7 @@ import (
 
 func min(arr []int32) int32 {
 	minElement := arr[0]
-	for i := 0; i < len(arr); i ++ {
+	for i := 0; i < len(arr); i++ {
 		if arr[i] < minElement {
 			minElement = arr[i]
 		}
@@ -34,7 +34,7 @@ func CutTheSticks(arr []int32) []int32 {
 
 	minElement := min(arr)
 	newArray := make([]int32, 0)
-	for i := 0; i < len(arr); i ++ {
+	for i := 0; i < len(arr); i++ {
 		el := arr[i] - minElement
 
 		if el > 0 {

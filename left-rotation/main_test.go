@@ -14,7 +14,6 @@ func isIntArrayEquals(a []int, b []int) bool {
 	return true
 }
 
-
 func TestRotLeft(t *testing.T) {
 
 	d := 4
@@ -25,5 +24,3 @@ func TestRotLeft(t *testing.T) {
 		t.Errorf("rotLeft was incorrect, got: %v, want: %v.", result, answer)
 	}
 }
-
-

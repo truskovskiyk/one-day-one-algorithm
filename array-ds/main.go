@@ -13,17 +13,16 @@ const MaxUint = ^uint(0)
 const MaxInt = int(MaxUint >> 1)
 const MinInt = -MaxInt - 1
 
-
 func getHourglass(arr [][]int, i int, j int) int {
 	a := arr[i][j]
-	b := arr[i][j + 1]
-	c := arr[i][j + 2]
+	b := arr[i][j+1]
+	c := arr[i][j+2]
 
-	d := arr[i + 1][j + 1]
+	d := arr[i+1][j+1]
 
-	e := arr[i + 2][j]
-	f := arr[i + 2][j + 1]
-	g := arr[i + 2][j + 2]
+	e := arr[i+2][j]
+	f := arr[i+2][j+1]
+	g := arr[i+2][j+2]
 
 	return a + b + c + d + e + f + g
 }
@@ -31,8 +30,8 @@ func getHourglass(arr [][]int, i int, j int) int {
 // Complete the hourglassSum function below.
 func hourglassSum(arr [][]int) int {
 	maxHourglassSum := MinInt
-	for i := 0; i < len(arr) - 2; i += 1 {
-		for j := 0; j < len(arr) - 2; j += 1 {
+	for i := 0; i < len(arr)-2; i += 1 {
+		for j := 0; j < len(arr)-2; j += 1 {
 			currentHourglassSum := getHourglass(arr, i, j)
 			if currentHourglassSum > maxHourglassSum {
 				maxHourglassSum = currentHourglassSum

@@ -1,13 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io"
-	"bufio"
-	"os"
 	"math/big"
+	"os"
 )
-
 
 func readFromStdIn() (int64, int64, int64) {
 	return readTask(bufio.NewReader(os.Stdin))
@@ -20,16 +19,15 @@ func readFromFile(filePath string) (int64, int64, int64) {
 }
 
 func readTask(ioReader io.Reader) (int64, int64, int64) {
-  inSource := bufio.NewReader(ioReader)
+	inSource := bufio.NewReader(ioReader)
 
-  var n, t1, t2 int64
+	var n, t1, t2 int64
 	fmt.Fscan(inSource, &t1)
 	fmt.Fscan(inSource, &t2)
 	fmt.Fscan(inSource, &n)
 
-  return n, t1, t2
+	return n, t1, t2
 }
-
 
 func FibonacciModified(n int64, t1 int64, t2 int64) string {
 	t11 := big.NewInt(t1)
@@ -46,7 +44,7 @@ func FibonacciModified(n int64, t1 int64, t2 int64) string {
 	return result.String()
 }
 func main() {
-	 n, t1, t2 := readFromStdIn()
+	n, t1, t2 := readFromStdIn()
 
 	//filePath := "./input.txt"
 	//n, t1, t2 := readFromFile(filePath)

@@ -6,5 +6,7 @@ jobs:
     working_directory: /go/src/github.com/truskovskiyk/one-day-one-algorithm
     steps:
       - checkout
+      - run: go get -u golang.org/x/lint/golint
       - run: go get -v -t -d ./...
+      - run: make lint
       - run: make test

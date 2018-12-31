@@ -2,7 +2,6 @@ package main
 
 import "testing"
 
-
 func TestJumpingOnCloudsOneCloud(t *testing.T) {
 	answer := 0
 	clouds := []int{0}
@@ -11,7 +10,6 @@ func TestJumpingOnCloudsOneCloud(t *testing.T) {
 		t.Errorf("jumpingOnClouds was incorrect, got: %v, want: %v.", result, answer)
 	}
 }
-
 
 func TestJumpingOnCloudsTwoClouds(t *testing.T) {
 	answer := 1
@@ -22,7 +20,6 @@ func TestJumpingOnCloudsTwoClouds(t *testing.T) {
 	}
 }
 
-
 func TestJumpingOnCloudsCase1(t *testing.T) {
 	answer := 4
 	clouds := []int{0, 0, 1, 0, 0, 1, 0}
@@ -31,7 +28,6 @@ func TestJumpingOnCloudsCase1(t *testing.T) {
 		t.Errorf("jumpingOnClouds was incorrect, got: %v, want: %v.", result, answer)
 	}
 }
-
 
 func TestJumpingOnCloudsCase2(t *testing.T) {
 	answer := 3

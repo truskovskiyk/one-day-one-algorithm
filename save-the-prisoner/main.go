@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"bufio"
-	"os"
+	"fmt"
 	"io"
 	"math"
+	"os"
 )
 
 func intMod(num uint64, k uint64) uint64 {

@@ -17,9 +17,9 @@ func jumpingOnClouds(c []int) int {
 	if len(c) == 2 {
 		return 1
 	}
-	numJumps:= 0
-	for i := 0; i < len(c) - 1;  {
-		if (i + 2) < len(c) && c[i + 2] == 0 {
+	numJumps := 0
+	for i := 0; i < len(c)-1; {
+		if (i+2) < len(c) && c[i+2] == 0 {
 			i += 2
 		} else {
 			i += 1
@@ -30,14 +30,14 @@ func jumpingOnClouds(c []int) int {
 }
 
 func main() {
-	reader := bufio.NewReaderSize(os.Stdin, 1024 * 1024)
+	reader := bufio.NewReaderSize(os.Stdin, 1024*1024)
 
 	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
 	checkError(err)
 
 	defer stdout.Close()
 
-	writer := bufio.NewWriterSize(stdout, 1024 * 1024)
+	writer := bufio.NewWriterSize(stdout, 1024*1024)
 
 	nTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
 	checkError(err)
