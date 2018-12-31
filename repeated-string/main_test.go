@@ -13,7 +13,6 @@ func TestRepeatedString(t *testing.T) {
 	}
 }
 
-
 func TestRepeatedStringHuge(t *testing.T) {
 	s := "a"
 	n := int64(1000000000000)

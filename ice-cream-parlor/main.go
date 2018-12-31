@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"sort"
 	"bufio"
-	"os"
+	"fmt"
 	"io"
+	"os"
+	"sort"
 )
 
 func BinarySearch(key int, arrayOfElements []int) int {

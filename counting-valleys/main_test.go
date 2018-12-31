@@ -12,7 +12,6 @@ func TestCountingValleys(t *testing.T) {
 	}
 }
 
-
 func TestCountingValleys2(t *testing.T) {
 	n := 8
 	path := "DDUUUUDD"

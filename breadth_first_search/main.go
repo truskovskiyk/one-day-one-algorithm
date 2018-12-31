@@ -9,18 +9,16 @@ import (
 	"strings"
 )
 
-
 type Graph struct {
 	numVertex int32
 	numEdges  int32
-	adj [][]int32
+	adj       [][]int32
 }
 
 func (g Graph) addEdge(v int32, w int32) {
 	g.adj[v] = append(g.adj[v], w)
 	g.adj[w] = append(g.adj[w], v)
 }
-
 
 func shortedPathFromedgeTo(edgeTo []int32, target int32, source int32) []int32 {
 	path := make([]int32, 0)
@@ -29,13 +27,13 @@ func shortedPathFromedgeTo(edgeTo []int32, target int32, source int32) []int32 {
 	}
 	return path
 }
-func (g Graph) BFS (source int32) [][]int32 {
+func (g Graph) BFS(source int32) [][]int32 {
 	marked := make([]bool, g.numVertex)
 	queue := make([]int32, 0)
 	edgeTo := make([]int32, g.numVertex)
 	marked[source] = true
 	queue = append(queue, source)
-	for ; len(queue) > 0; {
+	for len(queue) > 0 {
 		v := queue[0]
 		queue = queue[1:]
 		for _, w := range g.adj[v] {
@@ -76,7 +74,7 @@ func NewGraph(n int32, m int32, edges [][]int32) Graph {
 func formatResult(numVertex int32, shortedPath [][]int32, source int32) []int32 {
 	results := make([]int32, 0)
 	for i := int32(0); i < numVertex; i += 1 {
-		if i ==  source  {
+		if i == source {
 			continue
 		}
 		dist := int32(len(shortedPath[i]) * 6)
@@ -96,21 +94,21 @@ func bfs(n int32, m int32, edges [][]int32, s int32) []int32 {
 		e[1] = e[1] - 1
 	}
 	source := s - 1
-	graph := NewGraph(n,m,edges)
+	graph := NewGraph(n, m, edges)
 	shortedPath := graph.BFS(source)
 	return formatResult(graph.numVertex, shortedPath, source)
 
 }
 
 func main() {
-	reader := bufio.NewReaderSize(os.Stdin, 1024 * 1024)
+	reader := bufio.NewReaderSize(os.Stdin, 1024*1024)
 
 	stdout, err := os.Create(os.Getenv("OUTPUT_PATH"))
 	checkError(err)
 
 	defer stdout.Close()
 
-	writer := bufio.NewWriterSize(stdout, 1024 * 1024)
+	writer := bufio.NewWriterSize(stdout, 1024*1024)
 
 	qTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
 	checkError(err)
@@ -155,7 +153,7 @@ func main() {
 		for i, resultItem := range result {
 			fmt.Fprintf(writer, "%d", resultItem)
 
-			if i != len(result) - 1 {
+			if i != len(result)-1 {
 				fmt.Fprintf(writer, " ")
 			}
 		}

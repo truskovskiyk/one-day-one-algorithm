@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
-	"sort"
 )
 
 type Interval struct {

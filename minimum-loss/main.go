@@ -1,11 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io"
-	"bufio"
-	"os"
 	"math"
+	"os"
 	"sort"
 )
 
