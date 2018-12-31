@@ -1,6 +1,6 @@
 pkgs = $(shell go list ./...)
 
-ling:
+lint:
 	golint ./...
 
 test:
