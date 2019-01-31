@@ -9,10 +9,15 @@ import (
 	"strings"
 )
 
+
+func minimumBribesResult(q []int) string {
+	fmt.Println(q)
+	return "test"
+}
 // Complete the minimumBribes function below.
-func minimumBribes(q []int32) {
-
-
+func minimumBribes(q []int) {
+	result := minimumBribesResult(q)
+	fmt.Println(result)
 }
 
 func main() {
@@ -20,21 +25,21 @@ func main() {
 
 	tTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
 	checkError(err)
-	t := int32(tTemp)
+	t := int(tTemp)
 
 	for tItr := 0; tItr < int(t); tItr++ {
 		nTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
 		checkError(err)
-		n := int32(nTemp)
+		n := int(nTemp)
 
 		qTemp := strings.Split(readLine(reader), " ")
 
-		var q []int32
+		var q []int
 
 		for i := 0; i < int(n); i++ {
 			qItemTemp, err := strconv.ParseInt(qTemp[i], 10, 64)
 			checkError(err)
-			qItem := int32(qItemTemp)
+			qItem := int(qItemTemp)
 			q = append(q, qItem)
 		}
 
