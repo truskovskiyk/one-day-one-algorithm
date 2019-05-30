@@ -7,13 +7,33 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"math"
 )
 
 
 func minimumBribesResult(q []int) string {
-	fmt.Println(q)
-	return "test"
+	for i := len(q) - 1; i >= 0; i -= 1 {
+		diff := q[i] - (1 + i)
+		if diff > 2 {
+			return "Too chaotic"
+		}
+	}
+
+
+	moves := 0
+
+	for i := len(q) - 1; i >= 0; i -= 1 {
+		for j := int(math.Max(float64(q[i] - 2), 0)); j < i; j += 1 {
+			if q[j] > q[i] {
+				moves += 1
+			}
+		}
+
+	}
+
+	return strconv.Itoa(moves)
 }
+
 // Complete the minimumBribes function below.
 func minimumBribes(q []int) {
 	result := minimumBribesResult(q)
