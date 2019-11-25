@@ -10,8 +10,28 @@ import (
 )
 
 // Complete the maxSubsetSum function below.
-func maxSubsetSum(arr []int) int {
-	return 11
+func maxSubsetSum(arr []int64) int64 {
+	prev := arr[0]
+	max := arr[1]
+	if max < prev {
+		max = prev
+	}
+	for i := 2; i < len(arr); i++ {
+
+		cur := arr[i]
+		potential := cur + prev
+		prev = max
+
+		// potential | cur | max|
+
+		if potential > max && potential > prev {
+			max = potential
+		}
+		if cur > potential && cur > max {
+			max = cur
+		}
+	}
+	return max
 
 }
 
@@ -27,16 +47,16 @@ func main() {
 
 	nTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
 	checkError(err)
-	n := int32(nTemp)
+	n := int(nTemp)
 
 	arrTemp := strings.Split(readLine(reader), " ")
 
-	var arr []int
+	var arr []int64
 
 	for i := 0; i < int(n); i++ {
 		arrItemTemp, err := strconv.ParseInt(arrTemp[i], 10, 64)
 		checkError(err)
-		arrItem := int(arrItemTemp)
+		arrItem := int64(arrItemTemp)
 		arr = append(arr, arrItem)
 	}
 
